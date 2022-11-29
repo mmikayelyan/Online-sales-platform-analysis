@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/manuk/OneDrive/Desktop/Capstone_Project/Unicorn-1.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="2755"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:maincustomers"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="customers" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="138"/><column index="2" value="220"/><column index="3" value="206"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="order_details" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="179"/><column index="2" value="155"/><column index="3" value="123"/><column index="4" value="97"/><column index="5" value="166"/><column index="6" value="146"/><column index="7" value="196"/><column index="8" value="130"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="orders" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="155"/><column index="2" value="138"/><column index="3" value="125"/><column index="4" value="182"/><column index="5" value="162"/><column index="6" value="177"/><column index="7" value="190"/><column index="8" value="234"/><column index="9" value="157"/><column index="10" value="168"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">SELECT Count(*)
+FROM   customers 
+
+
+</sql><sql name="SQL 2">SELECT orders.shipping_city             AS City,
+       Sum(order_details.order_profits) AS Profit
+FROM   orders
+       JOIN order_details
+         ON orders.order_id = order_details.order_id
+WHERE  order_date LIKE '%2015'
+GROUP  BY 1
+ORDER  BY 2 DESC
+LIMIT  1;   
+
+</sql><sql name="SQL 3">SELECT Count(DISTINCT shipping_city)
+FROM   orders; 
+
+
+</sql><sql name="SQL 4">SELECT customers.customer_id          AS ID,
+       customers.customer_name        AS Name,
+       Sum(order_details.order_sales) AS Total_spent
+FROM   orders
+       JOIN order_details
+         ON orders.order_id = order_details.order_id
+       JOIN customers
+         ON orders.customer_id = customers.customer_id
+GROUP  BY 1
+ORDER  BY 3; 
+</sql><sql name="SQL 5">SELECT   orders.shipping_city                  AS city,
+         Avg(order_details.order_profit_ratio) AS profitability
+FROM     orders
+JOIN     order_details
+ON       orders.order_id = order_details.order_id
+WHERE    shipping_state IS 'Tennessee'
+GROUP BY 1
+ORDER BY 2 DESC limit 1;  
+</sql><sql name="SQL 6">SELECT orders.shipping_city             AS city,
+       Avg(order_details.order_profits) AS average_profit
+FROM   orders
+JOIN   order_details
+ON     orders.order_id = order_details.order_id
+WHERE  shipping_city IS 'Lebanon';
+</sql><sql name="SQL 7">SELECT customer_segment,
+       Count(1)
+FROM   customers
+GROUP  BY 1; 
+</sql><sql name="SQL 8">SELECT   product.product_category,
+         Avg(order_details.order_profits) AS average_profit
+FROM     order_details
+JOIN     orders
+ON       order_details.order_id = orders.order_id
+JOIN     product
+ON       order_details.product_id = product.product_id
+WHERE    orders.shipping_state IS 'Iowa'
+GROUP BY 1
+ORDER BY 2 DESC limit 1;
+
+</sql><sql name="SQL 9">SELECT   product.product_id,
+         product.product_name,
+         Sum(order_details.quantity)
+FROM     order_details
+JOIN     orders
+ON       order_details.order_id = orders.order_id
+JOIN     product
+ON       order_details.product_id = product.product_id
+WHERE    orders.order_date LIKE '%2016'
+AND      product.product_category IS 'Furniture'
+GROUP BY 1
+ORDER BY 3 DESC limit 1;
+</sql><sql name="SQL 10">SELECT customers.customer_id,
+       customers.customer_name,
+       Sum(order_details.order_sales/(1 - order_details.order_discount) - order_details.order_sales) AS total_discount   
+FROM   orders
+       JOIN customers
+         ON orders.customer_id = customers.customer_id
+       JOIN order_details
+         ON orders.order_id = order_details.order_id
+GROUP  BY 1
+ORDER  BY 3 DESC
+LIMIT  1; 
+
+</sql><sql name="SQL 11">SELECT   Cast(Substr(orders.order_date,1,Instr(order_date,'/')-1) AS INT)                                                                                              AS month,
+         Substr(orders.order_date,-4)                                                                                                                                  AS year,
+         Sum(order_details.order_profits)                                                                                                                              AS profit,
+         Sum(order_details.order_profits) - (Lag(Sum(order_details.order_profits),1) OVER (ORDER BY Cast(Substr(orders.order_date,1,Instr(order_date,'/')-1) AS INT))) AS profit_differance
+FROM     orders
+JOIN     order_details
+ON       orders.order_id = order_details.order_id
+WHERE    Substr(orders.order_date,-4) IS '2018'
+GROUP BY 1
+ORDER BY 1;
+
+</sql><sql name="SQL 12">SELECT orders.order_id,
+       Sum(order_details.order_sales)
+FROM   orders
+       JOIN order_details
+         ON orders.order_id = order_details.order_id
+WHERE  orders.order_date LIKE '%2015'
+GROUP  BY 1
+ORDER  BY 2 DESC; 
+</sql><sql name="SQL 13">SELECT   orders.shipping_city,
+         Sum(order_details.quantity) AS rank_by_quantitiy
+FROM     orders
+JOIN     order_details
+ON       orders.order_id = order_details.order_id
+WHERE    orders.order_date LIKE '%2015'
+AND      orders.shipping_region IS 'East'
+GROUP BY 1
+ORDER BY 2 DESC;
+</sql><sql name="SQL 14">SELECT customers.customer_id,
+       customers.customer_name,
+       customers.customer_segment,
+       order_details.order_details_id,
+       order_details.quantity,
+       order_details.order_discount,
+       order_details.order_profits,
+       order_details.order_profit_ratio,
+       order_details.order_sales,
+       orders.order_id,
+       orders.order_date,
+       orders.shipping_city,
+       orders.shipping_state,
+       orders.shipping_region,
+       orders.shipping_country,
+       orders.shipping_postal_code,
+       orders.shipping_date,
+       orders.shipping_mode,
+       product.product_id,
+       product.product_name,
+       product.product_category,
+       product.product_subcategory,
+       product.product_manufacturer
+FROM   orders
+       JOIN order_details
+         ON orders.order_id = order_details.order_id
+       JOIN customers
+         ON customers.customer_id = orders.customer_id
+       JOIN product
+         ON product.product_id = order_details.product_id; 
+		 
+</sql><current_tab id="1"/></tab_sql></sqlb_project>
