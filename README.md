@@ -6,39 +6,44 @@ In this project, I used SQL, Google Sheets, and Tableau to analyze Unicorn E-com
 
 # The Datasets
 I used datasets that includes 4 tables with the following structure:
-
-
-
-
+![image](https://user-images.githubusercontent.com/92160989/204414443-f0dc9fd0-745e-49b7-af20-f3554b331857.png)
 
 # Outcomes
-I've written SQL queries to provide the following information:
-1. GLOBAL SITUATION
-- What was the total forest area (in sq km) of the world in 1990? Please keep in mind that you can use the country record denoted as “World" in the region table.
-- What was the total forest area (in sq km) of the world in 2016? Please keep in mind that you can use the country record in the table is denoted as “World.”
-- What was the change (in sq km) in the forest area of the world from 1990 to 2016?
-- What was the percent change in forest area of the world between 1990 and 2016?
-- If you compare the amount of forest area lost between 1990 and 2016, to which country's total area in 2016 is it closest to?
-2. REGIONAL OUTLOOK
-- What was the percent forest of the entire world in 2016? Which region had the HIGHEST percent forest in 2016, and which had the LOWEST, to 2 decimal places?
-- What was the percent forest of the entire world in 1990? Which region had the HIGHEST percent forest in 1990, and which had the LOWEST, to 2 decimal places?
-- Based on the table you created, which regions of the world DECREASED in forest area from 1990 to 2016?
-3. COUNTRY-LEVEL DETAIL
-- Which 5 countries saw the largest amount decrease in forest area from 1990 to 2016? What was the difference in forest area for each?
-- Which 5 countries saw the largest percent decrease in forest area from 1990 to 2016? What was the percent change to 2 decimal places for each?
-- If countries were grouped by percent forestation in quartiles, which group had the most countries in it in 2016?
-- List all of the countries that were in the 4th quartile (percent forest > 75%) in 2016.
-- How many countries had a percent forestation higher than the United States in 2016?
-
-As a result of the above, I have prepared a report to help understand the global deforestation overview between 1990 and 2016.
+1. SQL - I've written SQL queries to provide the following information:
+- How many Customers do we have in the data?
+- What was the city with the most profit for the company in 2015 and how much was it?
+- How many different cities do we have in the data?
+- Show the total spent by customers from low to high.
+- What is the most profitable City in the State of Tennessee?
+- What’s the average annual profit for that city across all years in that city?
+- What is the distribution of customer types in the data?
+- What’s the most profitable product category on average in Iowa across all years?
+- What is the most popular product in that category across all states in 2016?
+- Which customer got the most discount in the data? (in total amount)
+- How widely did monthly profits vary in 2018?
+- Which order was the highest in 2015?
+- What was the rank of each city in the East region in 2015?
+2. GOOGLE SHEETS - A [dynamic dashboard](https://docs.google.com/spreadsheets/d/1plWxRo6RzJakATD-fhzErnjm_FzW3e-OE_KvyqVI0EU/edit?usp=sharing) was created with the following information:
+- A histogram of the profit column with a bucket size of 20 and an outlier percentile of 5%
+- A chart that shows the profit over the months
+- Top 5 profitable subcategories
+- Bottom 5 profitable subcategories
+- Top 10 profitable customers
+- Bottom 10 profitable customers
+ - Sum of positive profit
+- Sum of negative profit
+- Number of distinct orders
+3. TABLEAU - A multi-filter [Tableau dashboard](https://public.tableau.com/views/SalesDashboard_16678510509370/Unicorn?:language=en-US&:display_count=n&:origin=viz_share_link) that displays sales and profit analysis across different dimensions was created.
 
 # Requirements
 
 * Language: SQL
+* Tableau Public
+* You may use any spreadsheet application you like. This includes Google Sheets, Microsoft Excel, etc
 
 # Get started with the project
 - Download and install [DB Viewer](https://sqlitebrowser.org/dl/) for SQLite or use another tool of your choice that can load SQLite db file and run the queries.
-- The first step is to download the DB and the DB.sqbpro files. The second step is to open the DB.sqbpro as a project in SQLite. Scripts for running the queries are also attached to the report.
+- Download the Unicorn-1 and the Unicorn-1_drft1.sqbpro files, then open the DB.sqbpro as a project in SQLite.
 
 # Author
 
@@ -46,56 +51,4 @@ As a result of the above, I have prepared a report to help understand the global
  
  # Acknowledgements
 
-* [Udacity](https://udacity.com) - Udacity's Data Analyst Nanodegree program and [Masterschool](https://www.masterschool.com/) instructors were extremely helpful while I was pursuing this project.
-* [devart](https://www.devart.com/dbforge/sql/sqlcomplete/self-join-in-sql-server.html) - Understanding SQL Server SELF JOIN By Practical Examples
-* [w3schools](https://www.w3schools.com/sql/sql_join_self.asp) - SQL Self Join
-* [dpriver](https://www.dpriver.com/pp/sqlformat.htm) - Instant SQL Formatter
-
-
-# Explore-NYSE-financial-data
-MS Excel is being used to analyze real life financial data from the New York Stock Exchange.
-
-# Project Overview
-I analyzed historical financial data from S&P 500 companies for this project. As part of my work, I developed a financial forecasting model, a report, and dynamic dashboards within a spreadsheet program. 
-
-# The Dataset
-In this project I used a subset of a large dataset provided by [Kaggle](https://www.kaggle.com/datasets/dgawlik/nyse). The following information is included in the projectdata-nyse.csv file:
-- Ticker symbol: Stock symbol
-- Years: Number of years for which data is provided
-- Period ending
-- Total revenue
-- Cost of goods sold
-- Sales, General, and Administrative expenses
-- Research and Development expenses
-- Other Operating expense items
-- Global Industry Classification Standard (GICS) Sector: The industry sector the company is categorized under (e.g., American Airlines with the ticker symbol AAL is categorized under Industrials.)
-- GICS Sub Industry: Sub-industry sector the company is categorized under (e.g., AAL is further categorized under the sub-category of the "Airlines" industry.)
-
-# The Outcomes
-- An analysis of the data was conducted and a presentation was prepared to share the results
-- Created a dashboard for a profit and loss statement
-- Developed a financial forecasting model based on three scenarios
-
-The resultes are presented in the folloeing files:
- -nyse_project.pdf - the presentation with the visuals and summary
- -nyse_project.xlsx - spreadsheet workbook used to do the analysis for the report containing the following tabs:
-   - Data file
-   - Summary statistics
-   - P&L Statement Dashboard
-   - Forecast scenarios
-
-# The Interactive Experience
-A dashboard created for a Profit and Loss Statement that calculates the Gross Profit, Operating Profit, or EBIT for a company selected from a drop-down list. The drop-down list pulls historical fundamentals data to create the P&L Statement. The P&L statement includes the Gross Profit, Operating Profit, and EBIT values for all the years there is historical data available for that company in the dataset.
-A financial model created for a company of user choice that forecasts out the Gross Profit, Operating Profit, and EBIT for two more years using three scenarios (Best case, Weak case, and Base case). The forecasting model is dynamic for the selection of the case (Weak, Base, Strong) and for the chosen company sticker symbol.
-
-# Requirements
-
-* You may use any spreadsheet application you like. This includes Google Sheets, Microsoft Excel, etc.
-
-# Author
-
- * [Manuk Mikayelyan](https://github.com/mmikayelyan) - Sole author for this program.
- 
- # Acknowledgements
-
-* [Udacity](https://udacity.com) - Udacity's Data Analyst Nanodegree program and [Masterschool](https://www.masterschool.com/) instructors were extremely helpful while I was pursuing this project.
+* [Udacity's](https://udacity.com) Data Analyst Nanodegree program and [Masterschool](https://www.masterschool.com/) instructors were extremely helpful while I was pursuing this project.
